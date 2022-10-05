@@ -7,17 +7,19 @@ class GoogleOAuth extends Component {
   state = { isSignedIn: null, userId: null };
 
   componentDidMount() {
-    // GoogleAPI JS present in windows scope, but need to load oAuth too.
-    window.google.accounts.id.initialize({
-      client_id: G_OAUTH_CLIENT_ID,
-      callback: this.OAuthResponseHandler,
-    });
-    // Renders Google icon, and user details on sign in button.
-    window.google.accounts.id.renderButton(
-      document.getElementById("signInDiv"),
-      { theme: "outline", size: "large" }
-    );
-  }
+                        // GoogleAPI JS present in windows scope, but need to load oAuth too.
+                        window.google.accounts.id.initialize({
+                          client_id: G_OAUTH_CLIENT_ID,
+                          callback: this.OAuthResponseHandler,
+                        });
+                        // Renders Google icon, and user details on sign in button.
+                        // Do not remove signInDiv button, as this link will then break (until page refreshed).
+                        // Simply hide the signInDiv if it is not required.
+                        window.google.accounts.id.renderButton(
+                          document.getElementById("signInDiv"),
+                          { theme: "outline", size: "large" }
+                        );
+                      }
 
   OAuthResponseHandler = (response) => {
     const decodedJWT = jwt_decode(response.credential);
@@ -40,7 +42,11 @@ class GoogleOAuth extends Component {
       <React.Fragment>
         <div id="signInDiv"></div>{" "}
         {this.state.isSignedIn && (
-          <div id="signOutDiv" onClick={this.onSignOutClicked}>
+          <div
+            id="signOutDiv"
+            className="ui red google button"
+            onClick={this.onSignOutClicked}
+          >
             Sign Out
           </div>
         )}
