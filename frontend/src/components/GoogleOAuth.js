@@ -6,17 +6,14 @@ import { connect } from "react-redux";
 import { signIn, signOut } from "../actions";
 
 class GoogleOAuth extends Component {
-  // null means neither signed in / out.
-  state = { isSignedIn: null, userId: null };
 
   componentDidMount() {
     // GoogleAPI JS present in windows scope, but need to load oAuth too.
-    console.log(
-      window.google.accounts.id.initialize({
-        client_id: G_OAUTH_CLIENT_ID,
-        callback: this.onSignInClicked,
-      })
-    );
+
+    window.google.accounts.id.initialize({
+      client_id: G_OAUTH_CLIENT_ID,
+      callback: this.authCallback,
+    });
     // Renders Google icon, and user details on sign in button.
     // Do not remove signInDiv button, as this link will then break (until page refreshed).
     // Simply hide the signInDiv if it is not required.
@@ -26,18 +23,28 @@ class GoogleOAuth extends Component {
     );
   }
 
-  onSignInClicked = (response) => {
-    const decodedJWT = jwt_decode(response.credential);
-    this.setState({
-      userId: decodedJWT.sub,
-      isSignedIn: decodedJWT.email_verified,
-    });
-    document.getElementById("signInDiv").hidden = true;
+  // Whhen Google Sign in Finished. Then sign in verified user and update state, 
+  // else sign out user and also update state.
+  authCallback = (response) => {
+    const signedInObject = this.getSignedInObject(response);
+    if(signedInObject.isSignedIn){
+      this.props.signIn(signedInObject.userId);
+      document.getElementById("signInDiv").hidden = true;
+    }else{
+      this.props.signOut();
+    }
   };
 
+  getSignedInObject(response) {
+    const decodedJWT = jwt_decode(response.credential);
+    return {
+      userId: decodedJWT.sub,
+      isSignedIn: decodedJWT.email_verified,
+    };
+  }
+
   onSignOutClicked = () => {
-    // Reset the userID and signIn status:
-    this.setState({ ...this.state, isSignedIn: null, userId: null });
+    this.props.signOut();
     document.getElementById("signInDiv").hidden = false;
   };
 
@@ -46,7 +53,7 @@ class GoogleOAuth extends Component {
     return (
       <React.Fragment>
         <div id="signInDiv"></div>{" "}
-        {this.state.isSignedIn && (
+        {this.props.isSignedIn && (
           <div
             id="signOutDiv"
             className="ui red google button"
