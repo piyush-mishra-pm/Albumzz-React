@@ -4,6 +4,7 @@ import { Field, reduxForm } from "redux-form";
 // Re-used by Album Create and Edit forms.
 // Accepts:
 // - onAlbumFormSubmit: callback for form submission.
+// - initialValues (Since form is wrapped with redux-form).
 class AlbumForm extends React.Component {
   renderInputError(meta) {
     if (meta.touched && meta.error) {

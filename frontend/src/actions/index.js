@@ -19,7 +19,7 @@ export const signOut = (payload) => ({
 export const createAlbum = (formValues) => async (dispatch, getState) => {
   const { userId } = getState().oAuth;
   const createResponse = await jsonServerApi.post("/albums", { ...formValues, userId });
-  await dispatch({ type: ACTION_TYPES.CREATE_ALBUM, payload: createResponse.data });
+  dispatch({ type: ACTION_TYPES.CREATE_ALBUM, payload: createResponse.data });
   history.push("/");
 };
 
@@ -39,6 +39,12 @@ export const deleteAlbum = (id) => async (dispatch) => {
 };
 
 export const editAlbum = (id, formValues) => async (dispatch) => {
-  const editAlbumResponse = await jsonServerApi.put(`/albums/${id}`, formValues);
-  dispatch({ type: ACTION_TYPES.EDIT_ALBUM, payload: editAlbumResponse.data });
+  // patch better than put here, as we don't want to entirely replace existing album with edited one.
+  // Only need to update some properties on existing album. Patch more suitable than Put.
+  const editAlbumResponse = await jsonServerApi.patch(`/albums/${id}`, formValues);
+  dispatch({
+    type: ACTION_TYPES.EDIT_ALBUM,
+    payload: editAlbumResponse.data,
+  });
+  history.push("/");
 };

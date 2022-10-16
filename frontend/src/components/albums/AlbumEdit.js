@@ -1,23 +1,29 @@
 import React from 'react';
 import { connect } from "react-redux";
 
-import { getAlbum } from "../../actions";
+import { getAlbum, editAlbum } from "../../actions";
+import AlbumForm from "./AlbumForm";
 
 class AlbumEdit extends React.Component {
   componentDidMount() {
     this.props.getAlbum(this.props.match.params.id);
   }
+
+  onEditAlarmSubmit = (formValues) => {
+    // Only using properties we expect to change, not others like userId.
+    console.log("form submission:", formValues);
+    this.props.editAlbum(this.props.match.params.id, formValues);
+  };
+
   render() {
-    console.log(this.props);
     if (!this.props.album) {
       return <div>Loading . . .</div>;
     }
     return (
       <div>
-        <h1>Album Edit</h1>
+        <h1>Edit Album</h1>
         <p>Title: {this.props.album.title}</p>
-        <p>Id: {this.props.album.id}</p>
-        <p>userId: {this.props.album.userId}</p>
+        <AlbumForm onAlbumFormSubmit={this.onEditAlarmSubmit} initialValues={{ title: this.props.album.title }} />
       </div>
     );
   }
@@ -31,4 +37,4 @@ const mapStateToProps = (state, ownProps) => {
   return { album: state.albums[ownProps.match.params.id] };
 };
 
-export default connect(mapStateToProps, { getAlbum })(AlbumEdit);
+export default connect(mapStateToProps, { getAlbum, editAlbum })(AlbumEdit);
