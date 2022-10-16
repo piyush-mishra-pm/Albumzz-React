@@ -1,4 +1,5 @@
 import ACTION_TYPES from "./ACTION_TYPES";
+import history from "../history";
 import jsonServerApi from "../apis/json-server-api";
 
 // Authentication related Actions:
@@ -18,7 +19,8 @@ export const signOut = (payload) => ({
 export const createAlbum = (formValues) => async (dispatch, getState) => {
   const { userId } = getState().oAuth;
   const createResponse = await jsonServerApi.post("/albums", { ...formValues, userId });
-  dispatch({ type: ACTION_TYPES.CREATE_ALBUM, payload: createResponse.data });
+  await dispatch({ type: ACTION_TYPES.CREATE_ALBUM, payload: createResponse.data });
+  history.push("/");
 };
 
 export const getAlbum = (id) => async (dispatch) => {

@@ -27,8 +27,12 @@ class AlbumList extends React.Component {
     if (album.userId && album.userId === this.props.loggedInUserId) {
       return (
         <div className="right floated content">
-          <button className="ui button primary">Edit</button>
-          <button className="ui button negative">Delete</button>
+          <Link to={`/albums/edit/${album.id}`} className="ui button primary">
+            Edit
+          </Link>
+          <Link to={`/albums/delete/${album.id}`} className="ui button negative">
+            Delete
+          </Link>
         </div>
       );
     }
