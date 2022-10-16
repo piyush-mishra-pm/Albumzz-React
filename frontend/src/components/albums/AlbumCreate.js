@@ -1,5 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from "redux-form";
+import { connect } from "react-redux";
+import { createAlbum } from "../../actions/index";
 
 class AlbumCreate extends React.Component {
   renderInputError(meta) {
@@ -20,10 +22,10 @@ class AlbumCreate extends React.Component {
     );
   };
 
-  onFormSubmit(formValues) {
-    // todo: only console logginh right now. Not submititing.
-    console.log(formValues);
-  }
+  onFormSubmit = (formValues) => {
+    console.log("form submission:", formValues);
+    this.props.createAlbum(formValues);
+  };
 
   render() {
     return (
@@ -50,7 +52,9 @@ const validateFormValues = (formValues) => {
   return errors;
 };
 
-export default reduxForm({
+const reduxWrappedForm = reduxForm({
   form: "albumCreate",
   validate: validateFormValues,
 })(AlbumCreate);
+
+export default connect(null, { createAlbum })(reduxWrappedForm);
