@@ -15,8 +15,9 @@ export const signOut = (payload) => ({
 
 // Albums related Actions:
 
-export const createAlbum = (formValues) => async (dispatch) => {
-  const createResponse = await jsonServerApi.post("/albums", formValues);
+export const createAlbum = (formValues) => async (dispatch, getState) => {
+  const { userId } = getState().oAuth;
+  const createResponse = await jsonServerApi.post("/albums", { ...formValues, userId });
   dispatch({ type: ACTION_TYPES.CREATE_ALBUM, payload: createResponse.data });
 };
 
