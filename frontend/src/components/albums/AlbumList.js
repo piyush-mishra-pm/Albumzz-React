@@ -51,7 +51,6 @@ class AlbumList extends React.Component {
   }
 
   render() {
-    console.log(this.props.albums);
     return (
       <div>
         <div>{this.renderCreateAlbumLink()}</div>
