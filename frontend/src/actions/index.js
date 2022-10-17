@@ -36,6 +36,7 @@ export const getAlbums = () => async (dispatch) => {
 export const deleteAlbum = (id) => async (dispatch) => {
   await jsonServerApi.delete(`/albums/${id}`);
   dispatch({ type: ACTION_TYPES.DELETE_ALBUM, payload: id });
+  history.push("/");
 };
 
 export const editAlbum = (id, formValues) => async (dispatch) => {
