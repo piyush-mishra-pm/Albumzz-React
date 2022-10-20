@@ -13,7 +13,7 @@ class AlbumCreate extends React.Component {
     return (
       <div>
         <h1>Create Album</h1>
-        <AlbumForm onAlbumFormSubmit={this.onCreateAlbumFormSubmit} />
+        <AlbumForm onAlbumFormSubmit={this.onCreateAlbumFormSubmit} createOrEditButtonName="Create Album" />
       </div>
     );
   }

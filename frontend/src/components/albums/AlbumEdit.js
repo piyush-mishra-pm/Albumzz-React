@@ -23,7 +23,11 @@ class AlbumEdit extends React.Component {
       <div>
         <h1>Edit Album</h1>
         <p>Title: {this.props.album.title}</p>
-        <AlbumForm onAlbumFormSubmit={this.onEditAlarmSubmit} initialValues={{ title: this.props.album.title }} />
+        <AlbumForm
+          onAlbumFormSubmit={this.onEditAlarmSubmit}
+          initialValues={{ title: this.props.album.title }}
+          createOrEditButtonName="Edit Album"
+        />
       </div>
     );
   }

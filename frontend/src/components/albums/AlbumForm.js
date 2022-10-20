@@ -33,7 +33,9 @@ class AlbumForm extends React.Component {
     return (
       <form className="ui form error" onSubmit={this.props.handleSubmit(this.onFormSubmit)}>
         <Field name="title" component={this.renderTitleInput} title="Album Title: " />
-        <button className={`ui button ${this.props.valid ? "primary" : "disable"}`}>Create Album</button>
+        <button className={`ui button ${this.props.valid ? "primary" : "disable"}`}>
+          {this.props.createOrEditButtonName}
+        </button>
       </form>
     );
   }
