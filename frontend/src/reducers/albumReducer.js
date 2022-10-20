@@ -10,6 +10,7 @@ export default (state = INITIAL_STATE, action) => {
     case ACTION_TYPES.CREATE_ALBUM: // Uses fallthrough
     case ACTION_TYPES.GET_ALBUM: // Uses fallthrough
     case ACTION_TYPES.EDIT_ALBUM:
+      // Key Interpolation syntax:
       return { ...state, [action.payload.id]: action.payload };
 
     case ACTION_TYPES.DELETE_ALBUM:
