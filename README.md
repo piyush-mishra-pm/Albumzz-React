@@ -1,9 +1,17 @@
 # Albummzz:
 
-React project to perform CRUD on albums data of JSON placeholder API.
+React project to perform CRUD on REST-API.
 
-Features:
-- CRUD operations on Albums.
+---
+
+### Video Walkthrough:
+
+[![Video Walkthrough](https://img.youtube.com/vi/v7egKo4q1vM/maxresdefault.jpg)](https://youtu.be/v7egKo4q1vM)
+
+---
+
+### Features:
+- CRUD operations via RestAPI.
 - Google oAuth.
 - Contains both Backend and Frontend.
 - Backend using json-server (npm package).
@@ -13,12 +21,16 @@ Features:
   - React Router Dom (for navigation)
   - React Portals for Modal (delete album)
 
-## How to set up:
+---
+
+### How to set up:
 - Have npm installed.
 - Currently my google-o-Auth set up is such that it only allows limited Email IDs to test run this. You can provide your own google oAuth client ID in `frontend/src/KEYS.js`, and provide access permissions as you need.
 - If you are deploying json server not on localhost:3003, then need to change the url in `frontend/src/apis/json-server-api.js`.
 
-## How to start:
+---
+
+### How to start:
 Clone this repo, and have npm installed.
 ```bash
 # Start backend server (starts on 3003 port)
@@ -33,10 +45,14 @@ npm start
 # Albums data stored in backend/albumDb.json
 ```
 
-## Folder Structure:
+---
+
+### Folder Structure:
 - Frontend related react code is in `frontend/src`
 - Backend related `json-server` code and albumDb.json is in `backend/`
-- Directory Structure:
+- Directory Structure: Salient files shown below:
+
+```
 .
 ├── README.md                           # This ReadMe file. ;)
 ├── backend
@@ -49,11 +65,11 @@ npm start
     │   ├── favicon.ico
     │   └── index.html
     └── src
-        ├── KEYS.js                     # contains Google-oAuth Client ID (Need to use yours if making application)
-        ├── actions                     # Redux related Actions used to dispatch events (SIGN_IN, SIGN_OUT, CREATE,EDIT,DELETE,GET_ALBUM,GET_ALBUMS).
+        ├── KEYS.js                     # contains Google-oAuth Client ID
+        ├── actions                     # Redux related Actions to dispatch events.
         │   ├── ACTION_TYPES.js
         │   └── index.js
-        ├── apis                        # Axios wrapped for localhost:3003 (the port where json-server is running).
+        ├── apis                        # Axios wrapped for localhost:3003 json-server
         │   └── json-server-api.js
         ├── components                  # React components invoolved.
         │   ├── App.css
@@ -70,7 +86,8 @@ npm start
         ├── history.js
         ├── index.css
         ├── index.js                    # Entry point for React code.
-        └── reducers                    # Redux Reducers to modify state based on action's type and payload.
+        └── reducers                    # Redux Reducers to modify state.
             ├── albumReducer.js
             ├── index.js
             └── oAuthReducer.js
+```
