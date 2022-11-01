@@ -2,6 +2,10 @@
 
 React project to perform CRUD on REST-API.
 
+Hosted app links:
+- Backend on Heroku: https://react-albumzz-backend.herokuapp.com/
+- Frontend on Netlify: https://react-albumzz.netlify.app/
+
 ---
 
 ### Video Walkthrough:
