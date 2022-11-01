@@ -1,1 +1,0 @@
-export const G_OAUTH_CLIENT_ID = '91756010335-5kco814ip7f7n56hao3p1jdtektpkduq.apps.googleusercontent.com';
