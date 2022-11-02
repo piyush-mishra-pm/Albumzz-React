@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "json-server -p 3003 -w albumsDb.json"
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
