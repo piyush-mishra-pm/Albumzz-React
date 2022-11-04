@@ -1,6 +1,6 @@
 # Albummzz:
 
-React project to perform CRUD on REST-API.
+React-Typescript project to perform CRUD on REST-API.
 
 Hosted app links:
 - Backend on Heroku: https://react-albumzz-backend.herokuapp.com/
@@ -15,6 +15,7 @@ Hosted app links:
 ---
 
 ### Features:
+- TypeScript frontend code.
 - CRUD operations via RestAPI.
 - Google oAuth.
 - Contains both Backend and Frontend.
